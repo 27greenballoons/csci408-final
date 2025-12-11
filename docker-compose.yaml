@@ -1,0 +1,57 @@
+
+# # build if changes made: docker compose up -d --build
+# # start: docker compose up -d
+# # stop: docker compose down
+# # if issues w backend: docker compose build --no-cache backend
+
+services:
+  db:
+    image: postgres:15
+    container_name: credentials_db
+    restart: always
+    environment:
+      POSTGRES_DB: logins
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - appnet
+
+  backend:
+    build: ./backend
+    container_name: web_backend
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: logins
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    ports:
+      - "8000:8000"
+    networks:
+      - appnet
+
+  frontend:
+    build: .
+    container_name: web_frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+    networks:
+      - appnet
+    env_file:
+      - .env
+
+volumes:
+  pgdata:
+
+networks:
+  appnet:
+    driver: bridge

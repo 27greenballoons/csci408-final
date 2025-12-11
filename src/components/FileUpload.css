@@ -1,0 +1,322 @@
+/* FileUpload.css */
+
+/* --- Page and Card Structure --- */
+
+.upload-page {
+  /* This style assumes the component is wrapped in this container to get the background. */
+  min-height: 100vh;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.upload-container {
+  width: 100%;
+  max-width: 450px;
+}
+
+.upload-card {
+  background: white;
+  border-radius: 12px;
+  color: #059669;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.upload-card h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #059669;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.upload-subtitle {
+  font-size: 1rem;
+  color: #059669;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+/* --- Form Fields --- */
+
+.form-field {
+  margin-bottom: 1.5rem;
+}
+
+.form-field label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #059669;
+  margin-bottom: 0.5rem;
+}
+
+.file-input-field {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+  cursor: pointer;
+}
+
+.file-input-field:focus {
+  outline: none;
+  color: #059669;
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+.file-input-field::file-selector-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #10b981;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-right: 1rem;
+  transition: all 0.3s ease;
+}
+
+.file-input-field::file-selector-button:hover {
+  background-color: #059669;
+}
+
+.file-name {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: #10b981;
+  font-weight: 500;
+}
+
+/* --- Button Styling (Dynamic States) --- */
+
+.upload-submit-button,
+.safe-scan-button,
+.danger-scan-button {
+  width: 100%;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  text-transform: uppercase;
+}
+
+/* Default/Initial Button (Scan File) */
+.upload-submit-button {
+  background-color: #10b981;
+}
+
+.upload-submit-button:hover {
+  background-color: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+}
+
+/* SAFE Result Button */
+.safe-scan-button {
+  background-color: #22c55e; /* Green */
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+.safe-scan-button:hover {
+  background-color: #16a34a;
+  transform: scale(1.02);
+}
+
+/* THREAT DETECTED Result Button */
+.danger-scan-button {
+  background-color: #ef4444; /* Red */
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+.danger-scan-button:hover {
+  background-color: #dc2626;
+  transform: scale(1.02);
+}
+
+/* Disabled State (during Loading) */
+.upload-submit-button:disabled,
+.safe-scan-button:disabled,
+.danger-scan-button:disabled {
+  background-color: #94a3b8; /* Slate gray */
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* --- Message Boxes --- */
+
+.upload-message {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.upload-message.success {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.upload-message.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+
+/* --- Loading Screen/Spinner Styles --- */
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  padding: 2rem 1rem;
+  background-color: #f0fdf4; /* Light green background */
+  border: 2px solid #34d399; /* Green border */
+  border-radius: 10px;
+}
+
+.spinner {
+  /* Circular loading animation */
+  width: 30px;
+  height: 30px;
+  border: 4px solid rgba(16, 185, 129, 0.2);
+  border-top-color: #10b981;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-message {
+  font-size: 1rem;
+  color: #065f46;
+  font-weight: 500;
+}
+
+/* Simple pulsating dots for live feedback */
+.dot-pulse {
+  display: inline-block;
+  opacity: 0;
+  animation: dot-pulse 1s infinite steps(1) alternate;
+}
+
+.dot-pulse:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.dot-pulse:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes dot-pulse {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+
+/* --- Analysis Results Grid Styles --- */
+
+.analysis-results {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background-color: #f8fafc;
+}
+
+.analysis-results h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.result-label {
+  font-weight: 500;
+  color: #334155;
+}
+
+.result-value {
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+/* Color coding for result values */
+.result-item.malicious .result-value {
+  color: #ef4444; /* Red */
+}
+.result-item.suspicious .result-value {
+  color: #f59e0b; /* Yellow/Orange */
+}
+.result-item.harmless .result-value {
+  color: #22c55e; /* Green */
+}
+.result-item.undetected .result-value {
+  color: #64748b; /* Gray */
+}
+
+.total-scans {
+  margin-top: 1.5rem;
+  text-align: right;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 640px) {
+  .upload-page {
+    padding: 1rem;
+  }
+
+  .upload-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .upload-card h2 {
+    font-size: 1.75rem;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr; /* Stack results on small screens */
+  }
+}
