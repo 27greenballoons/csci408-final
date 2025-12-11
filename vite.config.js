@@ -18,5 +18,12 @@ export default defineConfig({
         changeOrigin: true,
       },
     }
-  }
+  },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./vitest.setup.js'], // A file for global test setup like API mocks
+    include: ['**/*.test.js', '**/*.fuzz.js'], // Ensure it includes your fuzzing file
+    globals: true, // Use global functions like 'test' and 'expect'
+    transformMode: { web: [/\.(js|jsx)$/] },
+  },
 })

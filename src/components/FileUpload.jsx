@@ -103,10 +103,28 @@ function FileUpload() {
     setAnalysisResult(null);
 
     try {
+      let uploadUrl = 'https://www.virustotal.com/api/v3/files';
+      // VirusTotal requires a special URL for files larger than 32MB
+      if (file.size > 32 * 1024 * 1024) {
+        setMessage("File is large, getting special upload URL...");
+        const urlResponse = await fetch('https://www.virustotal.com/api/v3/files/upload_url', {
+          method: 'GET',
+          headers: {
+            'x-apikey': virusTotal,
+          },
+        });
+        if (!urlResponse.ok) {
+          throw new Error('Could not get large file upload URL.');
+        }
+        const urlData = await urlResponse.json();
+        uploadUrl = urlData.data;
+      }
+
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await fetch('https://www.virustotal.com/api/v3/files', {
+      setMessage("Uploading file for scanning...");
+      const response = await fetch(uploadUrl, {
         method: 'POST',
         headers: {
           'x-apikey': virusTotal,
@@ -130,7 +148,7 @@ function FileUpload() {
     } catch (error) {
       console.error("Error uploading file:", error);
       setIsLoading(false); 
-      setMessage("Error: Could not connect to VirusTotal.");
+      setMessage(`Error: ${error.message || 'Could not connect to VirusTotal.'}`);
     }
   };
 

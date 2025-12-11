@@ -1,0 +1,55 @@
+/* src/components/ColorPicker.css */
+
+.color-picker-container {
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* White card background */
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+.picker-title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.color-options-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for 8 options */
+    gap: 10px;
+    justify-items: center;
+}
+
+.color-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Circle shape */
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-option:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Style for the currently selected color */
+.color-option.selected {
+    border-color: #26a69a; /* Highlight with a distinct border color */
+    transform: scale(1.15);
+}
+
+.checkmark {
+    color: #333; /* Color of the checkmark */
+    font-weight: bold;
+    font-size: 1.2em;
+    text-shadow: 1px 1px 2px #fff; /* Ensures visibility on dark colors */
+}
