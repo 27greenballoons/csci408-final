@@ -87,9 +87,7 @@ pip install -r requirements.txt
 
 ### 3. Build and start the application
 
-```
-docker-compose up -d --build
-```
+`docker-compose up -d --build`
 
 - Frontend: http://localhost:8080  
 - Backend: http://localhost:8000
@@ -129,9 +127,7 @@ It is intended to work with:
 
 Fuzzing tests are located in:
 
-```
-fuzzing.test.js
-```
+`fuzzing.test.js`
 
 ---
 
@@ -162,6 +158,4 @@ The `docker-compose.yaml` file defines three services:
 
 To stop and remove the containers, run:
 
-```
-docker-compose down
-```
+`docker-compose down`
