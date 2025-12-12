@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 
-function Login() {
+function Login({ onLoginSuccess }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -23,6 +23,10 @@ function Login() {
 
       const data = await response.json();
       setMessage(data.message);
+
+      if (data.message.includes('success')) {
+        onLoginSuccess();
+      }
 
       // Optional: reset fields
       setUsername('');

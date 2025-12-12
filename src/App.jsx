@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Login from './components/Login';
 import FileUpload from './components/FileUpload';
 import ColorPicker from './components/ColorPicker';
+import Success from './components/Success';
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
+
+  if (isLoggedIn) {
+    return <Success />;
+  }
+
   return (
     // The main wrapper is now just a container for the page flow
     <div className="App">
@@ -38,7 +49,7 @@ function App() {
           </section>
           
           <section id="login">
-            <Login />
+            <Login onLoginSuccess={handleLoginSuccess} />
           </section>
           
         </div>
